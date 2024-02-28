@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Defines a health system
@@ -10,15 +13,20 @@ public class Health : MonoBehaviour
 {
     // the health (current and max) values
     [Header("health settings")] // this makes the inspector look a bit more organized.
-    private float CurrentHealth = 0;
-    private float MaxHealth = 100; // Should you be able to change the value of this in the inspector? Probably...
+    [SerializeField] private float currentHealth = 0;
+    [SerializeField] private float maxHealth = 600; // Should you be able to change the value of this in the inspector? Probably...
+
+    [SerializeField] private UnityEvent<float> healthUpdate;
+    [SerializeField] private UnityEvent gameOver;
     
     /// <summary>
     /// Make sure the player start at max health
+    /// .. and the UI is updated
     /// </summary>
     void Start()
     {
-        CurrentHealth = MaxHealth;
+        currentHealth = maxHealth;
+        BroadcastEvents();
     }
     
     /// <summary>
@@ -27,7 +35,6 @@ public class Health : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        Debug.Log("Clicked");
         // make sure health decreases
         Decrease(10);
     }
@@ -38,9 +45,21 @@ public class Health : MonoBehaviour
     /// <param name="amount">The amount to decrease the health by</param>
     private void Decrease(int amount)
     {
-        CurrentHealth -= amount;
-        Debug.Log(CurrentHealth);
-        
-        // todo: Let the world (more specifically: the health bar) know the new CurrentHealth
+        currentHealth -= amount;
+
+        BroadcastEvents();
+    }
+
+    /// <summary>
+    /// Broadcast/invoke the unity events
+    /// </summary>
+    private void BroadcastEvents()
+    {
+        healthUpdate.Invoke(currentHealth/maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            gameOver.Invoke();
+        }
     }
 }

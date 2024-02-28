@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Script that deals with the movement of the player
@@ -9,7 +10,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     // Defines the speed and makes sure the variable is exposed in the inspector for easy changing
-    [SerializeField] private float Speed = 4;
+    [SerializeField] private float speed = 4;
 
     /// <summary>
     /// Reads input on both input axis
@@ -19,6 +20,6 @@ public class Movement : MonoBehaviour
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         
-        transform.Translate(movement * Time.deltaTime * Speed);
+        transform.Translate(Time.deltaTime * speed * movement);
     }
 }
