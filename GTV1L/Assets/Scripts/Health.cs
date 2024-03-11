@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
     /// Decrease the health by the specified amount
     /// </summary>
     /// <param name="amount">The amount to decrease the health by</param>
-    private void Decrease(int amount)
+    public void Decrease(float amount)
     {
         currentHealth -= amount;
 
