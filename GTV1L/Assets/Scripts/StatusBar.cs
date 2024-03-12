@@ -12,7 +12,7 @@ public class StatusBar : MonoBehaviour
     /// <summary>
     /// Make sure the statsBar contains a reference to the UI Image
     /// </summary>
-    void Start()
+    void Awake()
     {
         statsBar = GetComponent<Image>();
     }

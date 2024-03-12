@@ -55,7 +55,7 @@ public class Health : MonoBehaviour
     /// </summary>
     private void BroadcastEvents()
     {
-        healthUpdate.Invoke(currentHealth/maxHealth);
+        healthUpdate?.Invoke(currentHealth/maxHealth);
 
         if (currentHealth <= 0)
         {
