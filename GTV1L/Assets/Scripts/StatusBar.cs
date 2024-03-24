@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Generic status bar. Could be used as a health bar, a stamina bar etc.
+/// </summary>
 public class StatusBar : MonoBehaviour
 {
     // define the gradient
