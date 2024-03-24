@@ -38,9 +38,17 @@ public class InventoryManager : MonoBehaviour
     {
         // logic:
         // if type is not in the inventory yet, add it with said amount
+        if (!data.ContainsKey(itemName))
+        {
+            data.Add(itemName, itemCount);
+        }
         // otherwise, increase the number of that type
-        
+        else
+        {
+            data[itemName] += itemCount;
+        }
         // lastly: broadcast the event that the inventory changed
+        BroadCastInventoryData();
     }
     
     /// <summary>

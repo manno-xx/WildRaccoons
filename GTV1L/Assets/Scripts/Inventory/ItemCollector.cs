@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -18,7 +15,8 @@ public class ItemCollector : MonoBehaviour
     {
         // ToDo This script is on the player, so the InventoryManager needs to be found and assigned to the inventoryManager.
         // See book Ch 8, p 224
-        
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+        Debug.Log($"Inventory manager: {inventoryManager}");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +24,9 @@ public class ItemCollector : MonoBehaviour
         if (other.TryGetComponent<PickUp>(out PickUp pickup))
         {
             Debug.Log(pickup);
+            // if it is a pick up, read the data
+            inventoryManager.AddToInventory(pickup.GetInventoryItemID(), pickup.GetItemCount());
+            Destroy(other.gameObject);
         }
     }
 }

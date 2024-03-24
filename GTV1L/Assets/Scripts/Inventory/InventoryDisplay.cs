@@ -31,15 +31,10 @@ public class InventoryDisplay : MonoBehaviour
     /// </summary>
     private void ClearUI()
     {
-        // see how many items exist as a child of this (in the hierarchy)
-        int slotCount = transform.childCount;
-
         // loop as many times that there are children
-        for (int i = 0; i < slotCount; i++)
+        foreach (Transform child in transform)
         {
-            // remove the child at position 0 (first child)
-            // if you keep removing the first, eventually all will be gone
-            Destroy(transform.GetChild(0).gameObject);
+            Destroy(child.gameObject);
         }
     }
 }

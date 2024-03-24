@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Represents an inventory slot
+/// Showing the icon of an inventory item and its amount
+/// </summary>
 public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image icon;
@@ -18,6 +22,10 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         label.text = count.ToString();
     }
 
+    /// <summary>
+    /// If you click it, something probably should happen
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log(icon.sprite.name);
